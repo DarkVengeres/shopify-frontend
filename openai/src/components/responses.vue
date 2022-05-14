@@ -16,7 +16,7 @@ export default {
     name: "Responses",
     data() {
         return {
-            isLoading: true,
+            isLoading: false,
         };
     },
     components: {

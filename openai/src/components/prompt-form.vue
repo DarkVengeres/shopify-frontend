@@ -1,7 +1,6 @@
 <template>
     <form @submit.prevent="submitForm" id="promptForm">
-        Prompt
-        <textarea type="text" id="promptText" required v-model="prompt"></textarea>
+        <textarea type="text" id="promptText" required v-model="prompt" placeholder="Enter your prompt here..."></textarea>
         <button type="submit">Submit</button>
     </form>
 </template>
@@ -14,8 +13,6 @@ export default {
     data() {
         return {
             prompt: "",
-            
-            // api: new API(),
         }
     },
     methods: {
@@ -35,14 +32,42 @@ export default {
         border-radius: 4px;
         border: 1px solid black;
         box-sizing: border-box;
+        font-weight: bold;
+        background-color: var(--consoleBackground);
+        resize: none;
+        margin : 10px;
+        padding: 10px;
+        color : var(--textTitles);
     }
 
     #promptForm {
         width: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    }
+
+    #promptForm button {
+        width: 100px;
+        height: 40px;
+        border-radius: 4px;
+        border: 1px solid black;
+        background-color: var(--primary);
+        color: var(--textTitles);
+        font-size: 1.2em;
+        font-weight: bold;
+        margin: 10px;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    #promptForm button:hover {
+        background-color: var(--secondary);
+        color : var(--textSubtitles);
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+    }
+
+    ::placeholder {
+        color: var(--textArea);
     }
     
 </style>

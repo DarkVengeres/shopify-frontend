@@ -84,7 +84,7 @@ export default {
 
     button:hover {
         transform: translateY(-5px);
-        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
+        box-shadow: 0px 0px 10px 0px var(--primary);
     }
 
     button:hover::after{
@@ -101,6 +101,7 @@ export default {
     .active{
         background-color: var(--primary);
         color: var(--textTitles);
+        box-shadow: 0px 0px 10px 0px var(--primary);
     }
 
     .fade-enter-active,

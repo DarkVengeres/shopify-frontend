@@ -52,6 +52,7 @@ export default {
 <style scoped>
     
     input {
+        opacity: 0.97;
         margin: 20px 20px 0px 20px;
         padding: 20px;
         border-radius: 4px;
@@ -66,6 +67,7 @@ export default {
     }
 
     #promptForm {
+        opacity: 0.97;
         width: 100%;
         display: flex;
         flex-direction: column;

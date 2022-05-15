@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="submitForm" id="promptForm">
-        <textarea v-on:keyup.enter="submitForm" type="text" id="promptText" required v-model="prompt" placeholder="Enter your prompt here..."></textarea>
+        <textarea v-on:keyup.enter="submitForm" type="text" id="promptText" required v-model="prompt" placeholder="Enter your question here..."></textarea>
         <div class="buttonLoader">
             <button type="submit" id="submit"> Submit </button>
             <button @click.prevent="resetResponses()" id="reset"> Reset </button>
@@ -52,6 +52,7 @@ export default {
     }
 
     #promptText {
+        opacity: 0.97;
         height: 150px;
         padding: 20px;
         border-radius: 4px;

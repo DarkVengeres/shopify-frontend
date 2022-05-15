@@ -2,7 +2,9 @@
   <div class="home">
     <div class="spacer layer1">
       <div id="headContainer">
-        <h1 id="mainTitle">Journalist AI</h1>
+        <div id="navContainer">
+            <h1 id="mainTitle">Journalist AI</h1>
+        </div>
         <div>
           <button id="import" @click="importJSON()">Import</button>
           <button id="export" @click="exportJSON()">Export</button>
@@ -110,6 +112,27 @@ export default {
 </script>
 
 <style scoped>
+
+#mainTitle {
+  font-size: 3em;
+  font-weight: bold;
+  color: var(--mainTitle);
+  margin-left: 10px;
+}
+
+#aboutPage:hover {
+  cursor: pointer;
+  color: var(--primary);
+}
+
+#navContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
 #headContainer {
   display: flex;
   flex-direction: row;
@@ -141,13 +164,6 @@ export default {
 
 .layer1 {
   background-image: url('./../assets/navWave.svg');
-}
-
-#mainTitle {
-  font-size: 3em;
-  font-weight: bold;
-  color: var(--mainTitle);
-  margin-left: 10px;
 }
 
 </style>

@@ -52,6 +52,7 @@ export default {
     }
 
     #promptText {
+        opacity: 0.97;
         height: 150px;
         padding: 20px;
         border-radius: 4px;

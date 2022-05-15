@@ -9,14 +9,14 @@
             <button id= "Shortcut finder" @click="selectCategorie('Shortcut finder')">Shortcut finder</button>
             
         </ul>
-        <div>
+        <transition name="fade" mode="out-in">
             <QandA v-if="activeCategorie =='Q&A'"></QandA>
             <Grammar v-if="activeCategorie =='Grammar'"></Grammar>
             <AdHelper v-if="activeCategorie =='Ad Helper'"></AdHelper>
             <AnalogyMaker v-if="activeCategorie =='Analogy Maker'"></AnalogyMaker>
             <EssayOutline v-if="activeCategorie =='Essay outline'"></EssayOutline>
             <ShortcutFinder v-if="activeCategorie =='Shortcut finder'"></ShortcutFinder>
-        </div>
+        </transition>
     </div>
 </template>
 
@@ -27,6 +27,7 @@ import AdHelper from './../components/categories/AdHelper.vue';
 import AnalogyMaker from './../components/categories/AnalogyMaker.vue';
 import EssayOutline from './../components/categories/EssayOutline.vue';
 import ShortcutFinder from './../components/categories/ShortcutFinder.vue';
+
 export default {
     data () {
         return {
@@ -61,6 +62,7 @@ export default {
 </script>
 
 <style scoped>
+
     #tagContainer {
         display: flex;
         flex-wrap: wrap;
@@ -100,6 +102,18 @@ export default {
         background-color: var(--primary);
         color: var(--textTitles);
     }
+
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity .3s ease-in-out;
+    }
+
+    .fade-enter,
+    .fade-leave-to {
+        opacity: 0;
+    }
+
+
 
     
    

@@ -25,10 +25,13 @@ export default {
     },
     methods: {
         submitForm() {
-            this.isLoading = true;
-            this.$root.$refs.home.submit("Shortcut to " + this.description+ " in " + this.software, this.promptType);
-            this.software = "";
-            this.description = "";
+            if(this.software.length > 0 && this.description.length > 0) {
+                 this.isLoading = true;
+                this.$root.$refs.home.submit("Shortcut to " + this.description+ " in " + this.software, this.promptType);
+                this.software = "";
+                this.description = "";
+            }
+           
         },
         loadingFinished() {
             this.isLoading = false;

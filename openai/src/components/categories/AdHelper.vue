@@ -25,10 +25,12 @@ export default {
     },
     methods: {
         submitForm() {
-            this.isLoading = true;
-            this.$root.$refs.home.submit("Write a creative ad about the following product aimed at " + this.target + ": Product :" + this.description, this.promptType);
-            this.target = "";
-            this.description = "";
+            if(this.target.length > 0 && this.description.length > 0) {
+                this.isLoading = true;
+                this.$root.$refs.home.submit("Write a creative ad about the following product aimed at " + this.target + ": Product : " + this.description, this.promptType);
+                this.target = "";
+                this.description = "";
+            }
         },
         loadingFinished() {
             this.isLoading = false;

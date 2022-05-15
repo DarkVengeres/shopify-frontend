@@ -1,8 +1,11 @@
 <template>
     <div>
-        <h1>Prompt :</h1>
+        <div class="promptHead">
+            <h2>Prompt :</h2>
+            <p class="type" :id="response.id"> {{response.promptType }} </p>
+        </div>
         <p class="card">{{ response.prompt }}</p>
-        <h1>Response :</h1>
+        <h2>Response :</h2>
         <p class="card">{{ response.response }}</p>
     </div>
 </template>
@@ -23,5 +26,24 @@ export default {
     margin: 10px;
     padding: 10px;
     text-align: left;
+    font-family: "M PLUS Code Latin";
 }
+
+.type {
+    font-weight: bold;
+    border: 3px solid;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 5px;
+    height: 30px;
+    margin: 10px;
+    color: var(--textTag);
+}
+
+.promptHead {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 </style>

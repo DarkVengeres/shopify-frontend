@@ -1,6 +1,15 @@
 <template>
   <div class="home">
-    <prompt-form @submit="submit"></prompt-form>
+    <div class="spacer layer1">
+      <div id="headContainer">
+        <h1 id="mainTitle">Welcome to OpenAI</h1>
+        <div>
+          <button id="import" @click="importJSON()">Import</button>
+          <button id="export" @click="exportJSON()">Export</button>
+        </div>
+      </div>
+      <prompt-form @submit="submit" @reset="reset"></prompt-form>
+    </div>
     <responses :responses="responses"></responses>
   </div>
 </template>
@@ -19,11 +28,14 @@ export default {
   },
   components: {
     PromptForm,
-    Responses
+    Responses,
   },
 
   methods: {
-    async submit(prompt){
+    reset() {
+      this.responses = [];
+    },
+    async submit(prompt, promptType) {
       const data = {
           prompt: prompt,
           temperature: 0.5,
@@ -45,15 +57,93 @@ export default {
         {
           id: this.responses.length + 1,
           prompt: prompt,
+          promptType: promptType,
           response: response.choices[0].text,
         }
       );
+      this.$root.$refs.promptForm.isLoading = false;
+    },
+    exportJSON() {
+      let data = {
+        responses: this.responses,
+      };
+      let blob = new Blob([JSON.stringify(data)], {type: "application/json"});
+      let url = URL.createObjectURL(blob);
+      let a = document.createElement("a");
+      a.href = url;
+      a.download = "openai.json";
+      a.click();
+    },
+    importJSON() {
+      let input = document.createElement("input");
+      input.type = "file";
+      input.addEventListener("change", (e) => {
+        let file = e.target.files[0];
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          let data = JSON.parse(e.target.result);
+          this.responses = data.responses;
+        };
+        reader.readAsText(file);
+      });
+      input.click();
     }
-    
   },
+
+  mounted() {
+    if(localStorage.responses){
+      this.responses = JSON.parse(localStorage.responses);
+    }
+  },
+
+  watch: {
+    responses(newResponses) {
+      localStorage.responses = JSON.stringify(newResponses);
+    }
+  },
+
 };
 </script>
 
 <style scoped>
+#headContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#export{
+  background-color: var(--primary);
+  color: var(--textTitles);
+  margin: 20px 20px 20px 10px;
+}
+
+#import{
+  background-color: var(--wave) ;
+  color: var(--primary);
+  border : 4px solid var(--primary);
+  padding: 5px;
+}
+
+
+.spacer {
+  aspect-ratio: 960/100;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.layer1 {
+  background-image: url('./../assets/navWave.svg');
+}
+
+#mainTitle {
+  font-size: 3em;
+  font-weight: bold;
+  color: var(--mainTitle);
+  margin-left: 10px;
+}
 
 </style>

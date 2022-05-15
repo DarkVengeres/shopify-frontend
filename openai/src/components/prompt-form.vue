@@ -1,43 +1,66 @@
 <template>
     <form @submit.prevent="submitForm" id="promptForm">
-        <textarea type="text" id="promptText" required v-model="prompt" placeholder="Enter your prompt here..."></textarea>
-        <button type="submit">Submit</button>
+
+        <textarea v-on:keyup.enter="submitForm" type="text" id="promptText" required v-model="prompt" placeholder="Enter your prompt here..."></textarea>
+        <div class="buttonLoader">
+            <button type="submit" id="submit"> Submit </button>
+            <button @click.prevent="resetResponses()" id="reset"> Reset </button>
+            <loading v-if="isLoading" ></loading>
+        </div>
     </form>
 </template>
 
 <script>
-// import API from '@/utility/API.js';
+import loading from './../components/loading.vue';
 
 export default {
     name: 'PromptForm',
     data() {
         return {
             prompt: "",
+            isLoading: false,
+            promptType: "Q&A"
         }
     },
     methods: {
         submitForm() {
-            this.$emit('submit', this.prompt);
+            this.isLoading = true;
+            this.$emit('submit', this.prompt, this.promptType);
+            this.prompt = "";
+        },
+        loadingFinished() {
+            this.isLoading = false;
+        },
+        resetResponses() {
+            this.$emit('reset');
         }
-    }
+    },
+    components: {
+        loading,
+    },
+    created () {
+        this.$root.$refs.promptForm = this;
+    },
 }
 </script>
 
 
 <style scoped>
     #promptText {
-        width: 100%;
         height: 150px;
-        padding: 10px;
+        padding: 20px;
         border-radius: 4px;
-        border: 1px solid black;
+        border: 1px solid var(--primary);
         box-sizing: border-box;
-        font-weight: bold;
+        font-family: "M PLUS Code Latin";
+        font-size: 1.2em;
         background-color: var(--consoleBackground);
         resize: none;
-        margin : 10px;
+        margin : 20px;
         padding: 10px;
         color : var(--textTitles);
+        outline : none;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
     }
 
     #promptForm {
@@ -46,24 +69,27 @@ export default {
         flex-direction: column;
     }
 
-    #promptForm button {
-        width: 100px;
-        height: 40px;
-        border-radius: 4px;
-        border: 1px solid black;
+    
+
+    #submit {
         background-color: var(--primary);
         color: var(--textTitles);
-        font-size: 1.2em;
-        font-weight: bold;
-        margin: 10px;
-        padding: 10px;
-        cursor: pointer;
     }
 
-    #promptForm button:hover {
+    #reset {
+        margin: 0 10px;
         background-color: var(--secondary);
-        color : var(--textSubtitles);
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+        color: var(--textSubtitles);
+    }
+
+    .buttonLoader {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        
     }
 
     ::placeholder {

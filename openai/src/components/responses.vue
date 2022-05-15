@@ -1,30 +1,27 @@
 <template>
     <div>
-        <h1>Responses :</h1>
-        <loading></loading>
-        <ul v-for="response in responses" v-bind:key="response.date" class="cardResponses">
-            <response :response="response"></response>
-        </ul>
+        <transition-group name="slide-down">
+            <li v-for="response in responses" v-bind:key="response.id" class="cardResponses">
+                <response :response="response"></response>
+            </li>
+        </transition-group>
     </div>
 </template>
 
 <script>
 import Response from './response.vue';
-import loading from './loading.vue';
 
 export default {
     name: "Responses",
-    data() {
-        return {
-            isLoading: false,
-        };
-    },
     components: {
         Response,
-        loading
     },
     props: {
         responses : Array,
+    },
+
+    created() {
+        this.$root.$refs.responses = this;
     },
 }
 </script>
@@ -37,4 +34,27 @@ export default {
     padding: 10px;
     border-radius: 4px;
 }
+
+.slide-down-enter-active,
+.slide-down-move{
+  transition: all 0.5s;
+}
+.slide-down-enter {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+li {
+    list-style: none;
+}
+
+/* Make animation when responses is deleted */
+.slide-down-leave-active {
+  transition: all 0.5s;
+}
+.slide-down-leave {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+
 </style>

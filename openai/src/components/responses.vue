@@ -47,14 +47,5 @@ li {
     list-style: none;
 }
 
-/* Make animation when responses is deleted */
-.slide-down-leave-active {
-  transition: all 0.5s;
-}
-.slide-down-leave {
-  transform: translateY(10px);
-  opacity: 0;
-}
-
 
 </style>

@@ -2,20 +2,20 @@
   <div class="home">
     <div class="spacer layer1">
       <div id="headContainer">
-        <h1 id="mainTitle">Welcome to OpenAI</h1>
+        <h1 id="mainTitle">Journalist AI</h1>
         <div>
           <button id="import" @click="importJSON()">Import</button>
           <button id="export" @click="exportJSON()">Export</button>
         </div>
       </div>
-      <prompt-form @submit="submit" @reset="reset"></prompt-form>
+      <tabs></tabs>
     </div>
     <responses :responses="responses"></responses>
   </div>
 </template>
 
 <script>
-import PromptForm from './../components/prompt-form.vue';
+import tabs from './../components/tabs.vue';
 import Responses from './../components/responses.vue';
 
 export default {
@@ -27,8 +27,8 @@ export default {
     };
   },
   components: {
-    PromptForm,
     Responses,
+    tabs,
   },
 
   methods: {
@@ -100,6 +100,10 @@ export default {
     responses(newResponses) {
       localStorage.responses = JSON.stringify(newResponses);
     }
+  },
+
+  created() {
+    this.$root.$refs.home = this;
   },
 
 };

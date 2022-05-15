@@ -1,7 +1,6 @@
 <template>
     <form @submit.prevent="submitForm" id="promptForm">
-
-        <textarea v-on:keyup.enter="submitForm" type="text" id="promptText" required v-model="prompt" placeholder="Enter your prompt here..."></textarea>
+        <textarea v-on:keyup.enter="submitForm" type="text" id="promptText" required v-model="prompt" placeholder="Enter a phrase here..."></textarea>
         <div class="buttonLoader">
             <button type="submit" id="submit"> Submit </button>
             <button @click.prevent="resetResponses()" id="reset"> Reset </button>
@@ -11,28 +10,27 @@
 </template>
 
 <script>
-import loading from './../components/loading.vue';
+import loading from './../loading.vue';
 
 export default {
-    name: 'PromptForm',
     data() {
         return {
             prompt: "",
             isLoading: false,
-            promptType: "Q&A"
+            promptType: "Analogy Maker"
         }
     },
     methods: {
         submitForm() {
             this.isLoading = true;
-            this.$emit('submit', this.prompt, this.promptType);
+            this.$root.$refs.home.submit("Create an analogy for this phrase :" + this.prompt, this.promptType);
             this.prompt = "";
         },
         loadingFinished() {
             this.isLoading = false;
         },
         resetResponses() {
-            this.$emit('reset');
+            this.$root.$refs.home.reset();
         }
     },
     components: {
@@ -46,6 +44,13 @@ export default {
 
 
 <style scoped>
+
+    #promptForm {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
     #promptText {
         height: 150px;
         padding: 20px;
@@ -63,13 +68,9 @@ export default {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
     }
 
-    #promptForm {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
+    ::placeholder {
+        color: var(--textArea);
     }
-
-    
 
     #submit {
         background-color: var(--primary);
@@ -90,10 +91,6 @@ export default {
         margin-left: 20px;
         margin-bottom: 20px;
         
-    }
-
-    ::placeholder {
-        color: var(--textArea);
     }
     
 </style>

@@ -1,4 +1,4 @@
-# shopify-frontend
+# Journalist AI
 Front End Developer Intern Challenge
 
 ## Description

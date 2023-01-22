@@ -1,5 +1,5 @@
 # Journalist AI
-Front End Developer Intern Challenge
+Front End Developer Challenge
 
 ## Description
 A web application using the power of open AI to help journalists. It can answer general questions, correct english sentences, help making an ad, create an analogy from a phrase, create an outline for your essay and help accelerating your work as a journalist by finding shortcuts in your software of choice.
